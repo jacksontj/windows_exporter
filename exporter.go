@@ -20,7 +20,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/log"
 	"github.com/prometheus/common/version"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 // WmiCollector implements the prometheus.Collector interface.
@@ -267,32 +266,32 @@ func initWbem() {
 
 func main() {
 	var (
-		listenAddress = kingpin.Flag(
+		listenAddress = collector.CommandLine.Flag(
 			"telemetry.addr",
 			"host:port for WMI exporter.",
 		).Default(":9182").String()
-		metricsPath = kingpin.Flag(
+		metricsPath = collector.CommandLine.Flag(
 			"telemetry.path",
 			"URL path for surfacing collected metrics.",
 		).Default("/metrics").String()
-		enabledCollectors = kingpin.Flag(
+		enabledCollectors = collector.CommandLine.Flag(
 			"collectors.enabled",
 			"Comma-separated list of collectors to use. Use '[defaults]' as a placeholder for all the collectors enabled by default.").
 			Default(filterAvailableCollectors(defaultCollectors)).String()
-		printCollectors = kingpin.Flag(
+		printCollectors = collector.CommandLine.Flag(
 			"collectors.print",
 			"If true, print available collectors and exit.",
 		).Bool()
-		timeoutMargin = kingpin.Flag(
+		timeoutMargin = collector.CommandLine.Flag(
 			"scrape.timeout-margin",
 			"Seconds to subtract from the timeout allowed by the client. Tune to allow for overhead or high loads.",
 		).Default("0.5").Float64()
 	)
 
-	log.AddFlags(kingpin.CommandLine)
-	kingpin.Version(version.Print("wmi_exporter"))
-	kingpin.HelpFlag.Short('h')
-	kingpin.Parse()
+	log.AddFlags(collector.CommandLine)
+	collector.CommandLine.Version(version.Print("wmi_exporter"))
+	collector.CommandLine.HelpFlag.Short('h')
+	collector.CommandLine.Parse()
 
 	if *printCollectors {
 		collectorNames := make(sort.StringSlice, 0, len(collector.Factories))

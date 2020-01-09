@@ -8,7 +8,6 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 func init() {
@@ -16,7 +15,7 @@ func init() {
 }
 
 var (
-	serviceWhereClause = kingpin.Flag(
+	serviceWhereClause = CommandLine.Flag(
 		"collector.service.services-where",
 		"WQL 'where' clause to use in WMI metrics query. Limits the response to the services you specify and reduces the size of the response.",
 	).Default("").String()

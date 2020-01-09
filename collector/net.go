@@ -8,7 +8,6 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 func init() {
@@ -16,11 +15,11 @@ func init() {
 }
 
 var (
-	nicWhitelist = kingpin.Flag(
+	nicWhitelist = CommandLine.Flag(
 		"collector.net.nic-whitelist",
 		"Regexp of NIC:s to whitelist. NIC name must both match whitelist and not match blacklist to be included.",
 	).Default(".+").String()
-	nicBlacklist = kingpin.Flag(
+	nicBlacklist = CommandLine.Flag(
 		"collector.net.nic-blacklist",
 		"Regexp of NIC:s to blacklist. NIC name must both match whitelist and not match blacklist to be included.",
 	).Default("").String()

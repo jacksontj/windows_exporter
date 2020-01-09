@@ -8,7 +8,6 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 func init() {
@@ -16,11 +15,11 @@ func init() {
 }
 
 var (
-	volumeWhitelist = kingpin.Flag(
+	volumeWhitelist = CommandLine.Flag(
 		"collector.logical_disk.volume-whitelist",
 		"Regexp of volumes to whitelist. Volume name must both match whitelist and not match blacklist to be included.",
 	).Default(".+").String()
-	volumeBlacklist = kingpin.Flag(
+	volumeBlacklist = CommandLine.Flag(
 		"collector.logical_disk.volume-blacklist",
 		"Regexp of volumes to blacklist. Volume name must both match whitelist and not match blacklist to be included.",
 	).Default("").String()
