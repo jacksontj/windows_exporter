@@ -2,6 +2,8 @@ package collector
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -9,6 +11,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
 	"golang.org/x/sys/windows/registry"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 // ...
@@ -19,6 +22,10 @@ const (
 	// Conversion factors
 	ticksToSecondsScaleFactor = 1 / 1e7
 	windowsEpoch              = 116444736000000000
+)
+
+var (
+	CommandLine = kingpin.New(filepath.Base(os.Args[0]), "")
 )
 
 // getWindowsVersion reads the version number of the OS from the Registry

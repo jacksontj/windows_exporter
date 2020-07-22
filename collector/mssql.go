@@ -14,16 +14,15 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
 	"golang.org/x/sys/windows/registry"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
-	mssqlEnabledCollectors = kingpin.Flag(
+	mssqlEnabledCollectors = CommandLine.Flag(
 		"collectors.mssql.classes-enabled",
 		"Comma-separated list of mssql WMI classes to use.").
 		Default(mssqlAvailableClassCollectors()).String()
 
-	mssqlPrintCollectors = kingpin.Flag(
+	mssqlPrintCollectors = CommandLine.Flag(
 		"collectors.mssql.class-print",
 		"If true, print available mssql WMI classes and exit.  Only displays if the mssql collector is enabled.",
 	).Bool()

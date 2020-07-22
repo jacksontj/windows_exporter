@@ -9,7 +9,6 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 func init() {
@@ -82,7 +81,7 @@ var (
 		"RpcClientAccess",
 	}
 
-	argExchangeListAllCollectors = kingpin.Flag(
+	argExchangeListAllCollectors = CommandLine.Flag(
 		"collectors.exchange.list",
 		"List the collectors along with their perflib object name/ids",
 	).Bool()

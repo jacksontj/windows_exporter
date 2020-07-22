@@ -11,7 +11,6 @@ import (
 	"github.com/StackExchange/wmi"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 func init() {
@@ -19,11 +18,11 @@ func init() {
 }
 
 var (
-	processWhitelist = kingpin.Flag(
+	processWhitelist = CommandLine.Flag(
 		"collector.process.whitelist",
 		"Regexp of processes to include. Process name must both match whitelist and not match blacklist to be included.",
 	).Default(".*").String()
-	processBlacklist = kingpin.Flag(
+	processBlacklist = CommandLine.Flag(
 		"collector.process.blacklist",
 		"Regexp of processes to exclude. Process name must both match whitelist and not match blacklist to be included.",
 	).Default("").String()
